@@ -1,13 +1,15 @@
 {
   "files": [],
   "references": [
-    { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ],
+  "include": ["src"],
     "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "module": "ESNext",
+    "useDefineForClassFields": true,
   }
 }

@@ -5,13 +5,13 @@ import path from "path"
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    open: true,
+    port: 3000
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-  },
-  server: {
-    open: true,
-    port: 3000
   }
 })
