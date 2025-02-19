@@ -40,7 +40,7 @@ export const userAuthContext = createContext<AuthContextData>({
 })
 
 export const UserAuthProvider:React.FunctionComponent<IUserAuthProiderProps> = ({children}) => {
-    const [userAuthContext, setUser] = useState<User | null>(null)
+    const [user, setUser] = useState<User | null>(null)
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth,(user) => {
