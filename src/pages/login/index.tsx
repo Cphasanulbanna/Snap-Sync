@@ -7,6 +7,10 @@ import { UserLogIn } from '@/types'
 import { Label } from '@radix-ui/react-label'
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import image1 from "@/assets/images/image1.jpg"
+import image2 from "@/assets/images/image2.jpg"
+import image3 from "@/assets/images/image3.jpg"
+import image4 from "@/assets/images/image4.jpg"
 
 const initialValue: UserLogIn = {
   email: "",
@@ -51,7 +55,7 @@ const Login = (props: Props) => {
       <div className="flex justify-center items-center w-full">
         <div className="p-6 w-2/3 hidden lg:block">
           <div className="grid grid-cols-2 gap-2">
-            {/* <img
+            <img
               className=" w-2/3 h-auto aspect-video rounded-3xl place-self-end"
               src={image2}
             />
@@ -66,7 +70,7 @@ const Login = (props: Props) => {
             <img
               className=" w-2/3 h-auto aspect-video rounded-3xl"
               src={image3}
-            /> */}
+            />
           </div>
         </div>
         <div className="max-w-sm rounded-xl border bg-card text-card-foreground shadow-sm">
