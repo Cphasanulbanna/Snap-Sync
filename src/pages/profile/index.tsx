@@ -2,7 +2,7 @@ import React from 'react'
 
 type Props = {}
 
-const Profile:React.FunctionComponent = (props: Props) => {
+const Profile:React.FunctionComponent  = (props: Props) => {
   return (
     <div>Profile</div>
   )
