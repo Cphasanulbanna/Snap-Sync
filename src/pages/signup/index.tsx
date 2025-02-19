@@ -10,9 +10,10 @@ import {
 import { Input } from "../../components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserSignIn } from "../../types";
 import { Icons } from "../../components/ui/icons";
+import { useUserAuth } from "../../context/userAuthContext";
 
 const initialValue: UserSignIn = {
   email: "",
@@ -20,17 +21,36 @@ const initialValue: UserSignIn = {
   confirmPassword: "",
 };
 
+interface ISignupProps {}
+
 const Signup: React.FunctionComponent<ISignupProps> = () => {
+  const {googleSignIn, signUp} = useUserAuth()
+  const navigate = useNavigate()
+
   const [userInfo, setUserInfo] = React.useState<UserSignIn>(initialValue);
 
 
   const handleSubmit = async(e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault()
+    try {
+      await signUp(userInfo.email, userInfo.password)
+      navigate("/")
+    } catch (error) {
+      console.log(error);
+      
+    }
 
   }
 
   const handleGoogleSignIn = async(e:React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
+    try {
+      await googleSignIn()
+      navigate("/")
+    } catch (error) {
+      console.log(error);
+      
+    }
   }
   return (
     <div className="bg-slate-800 w-full h-screen">
@@ -38,7 +58,7 @@ const Signup: React.FunctionComponent<ISignupProps> = () => {
         <div className="flex justify-center items-center w-full">
           <div className="p-6 w-2/3 hidden lg:block">
             <div className="grid grid-cols-2 gap-2">
-              <img
+              {/* <img
                 className=" w-2/3 h-auto aspect-video rounded-3xl place-self-end"
                 src={image2}
               />
@@ -53,7 +73,7 @@ const Signup: React.FunctionComponent<ISignupProps> = () => {
               <img
                 className=" w-2/3 h-auto aspect-video rounded-3xl"
                 src={image3}
-              />
+              /> */}
             </div>
           </div>
           <div className="max-w-sm rounded-xl border bg-card text-card-foreground shadow-sm">
