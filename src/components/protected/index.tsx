@@ -1,13 +1,9 @@
-import {  useUserAuth } from '@/context/userAuthContext';
 import { getAuth } from 'firebase/auth';
 import * as React from 'react';
 import { Navigate, useLocation, Outlet } from 'react-router-dom';
 import {useAuthState} from "react-firebase-hooks/auth"
 
-interface IProtectedRoutesProps {
-}
-
-const ProtectedRoutes: React.FunctionComponent<IProtectedRoutesProps> = (props) => {
+const ProtectedRoutes: React.FunctionComponent = () => {
     const location = useLocation()
     const auth  =getAuth()
     const [user, loading] = useAuthState(auth)
