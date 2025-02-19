@@ -8,12 +8,12 @@ import {
   CardTitle,
 } from "../../components/ui/card";
 import { Input } from "../../components/ui/input";
-import { Label } from "@radix-ui/react-label";
 import * as React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserSignIn } from "../../types";
 import { Icons } from "../../components/ui/icons";
 import { useUserAuth } from "../../context/userAuthContext";
+import { Label } from "@/components/ui/label";
 
 const initialValue: UserSignIn = {
   email: "",
