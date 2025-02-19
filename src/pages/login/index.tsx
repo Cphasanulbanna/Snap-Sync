@@ -102,7 +102,7 @@ const Login = (props: Props) => {
                   <Input
                     id="email"
                     type="email"
-                    placeholder="dipesh@example.com"
+                    placeholder="hasanul@example.com"
                     value={userLogInInfo.email}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setUserLogInInfo({ ...userLogInInfo, email: e.target.value })
