@@ -30,11 +30,11 @@ export interface Post {
 }
 
 export interface DocumentResponse {
-    id: string,
-    caption: string,
-    photos: PhotoMeta[],
-    likes: number,
-    userLikes: [],
-    userId: string | null,
-    date: Date
+    id?: string,
+    caption?: string,
+    photos?: PhotoMeta[],
+    likes?: number,
+    userLikes?: [],
+    userId?: string | null,
+    date?: Date
 }
