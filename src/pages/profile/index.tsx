@@ -5,11 +5,13 @@ import { getPostByUserId } from '@/repository/post.service'
 import { DocumentResponse, Post, ProfileResponse } from '@/types'
 import { Edit2Icon, HeartIcon, User } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {}
 
 const Profile:React.FunctionComponent  = (props: Props) => {
   const {user} = useUserAuth()
+  const navigate = useNavigate()
     const [data,setData] = useState<DocumentResponse[]>([])
     const initialUserInfo:ProfileResponse = {
       id: '',
@@ -70,7 +72,7 @@ const Profile:React.FunctionComponent  = (props: Props) => {
     };
 
     const editProfile  =() => {
-
+      navigate("/edit-profile", {state: userInfo})
     }
   
 
