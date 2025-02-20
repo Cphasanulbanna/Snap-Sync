@@ -1,3 +1,4 @@
+import FileUploader from '@/components/file-uploader';
 import Layout from '@/components/layout';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -17,10 +18,11 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = (props) => {
             <div className="flex flex-col">
               <Label className='mb-4' htmlFor='caption'>Photo Caption</Label>
               <Textarea className='mb-8' id='caption' placeholder='what is in your photo'></Textarea>
-              <div className="flex flex-col">
+              <div className="flex flex-col gap-4">
                 <Label  className='mb-4' htmlFor='photo'>Photos</Label>
+                <FileUploader />
               </div>
-              <Button className='mb-8 w-32' type='submit'>Post</Button>
+              <Button className='mt-8 w-32' type='submit'>Post</Button>
             </div>
           </form>
         </div>
