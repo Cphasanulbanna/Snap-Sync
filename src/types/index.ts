@@ -21,8 +21,8 @@ export interface PhotoMeta {
 }
 
 export interface Post {
-    captions: string,
-    photo: PhotoMeta[],
+    caption: string,
+    photos: PhotoMeta[],
     likes: number,
     userLikes: [],
     userId: string | null,
