@@ -2,6 +2,7 @@ import Layout from '@/components/layout'
 import { Button } from '@/components/ui/button'
 import { useUserAuth } from '@/context/userAuthContext'
 import { getPostByUserId } from '@/repository/post.service'
+import { getUserProfile } from '@/repository/user.service'
 import { DocumentResponse, Post, ProfileResponse } from '@/types'
 import { Edit2Icon, HeartIcon, User } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
@@ -45,9 +46,21 @@ const Profile:React.FunctionComponent  = (props: Props) => {
       }
     }
   
+
+
+
+    const getUserProfileInfo = async(id:string) => {
+      const data:ProfileResponse = await getUserProfile(id) ?? {}
+      if(data) {
+        setUserInfo(data)
+      }
+
+    }
+
     useEffect(() => {
       if(user != null) {
         getAllPosts(user.uid)
+        getUserProfileInfo(user.uid)
       }
     },[])
 

@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { createUserProfile, updateUserProfile } from '@/repository/user.service';
 import { FileEntry, UserProfile } from '@/types';
 import { User } from 'lucide-react';
 import * as React from 'react';
@@ -26,7 +27,26 @@ const EditProfile: React.FunctionComponent<IEditProfileProps> = (props) => {
 
       const updateProfile = async(e:React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault()
+        try {
+            if(id) {
+                await updateUserProfile(id,data)
+            }
+            else {
+                 await createUserProfile(data)
+            }
+            navigate('/profile')
+        } catch (error) {
+            console.log(error);
+            
+        }
+       
       }
+
+      React.useEffect(() => {
+        if(fileEntry.files.length > 0) {
+            setData({...data, photoURL: fileEntry.files[0].cdnUrl ?? ""})
+        }
+      }, [fileEntry])
   return <Layout>
   <div className="flex justify-center">
     <div className="border max-w-3xl w-full">
@@ -36,7 +56,7 @@ const EditProfile: React.FunctionComponent<IEditProfileProps> = (props) => {
         <div className="flex flex-col gap-4">
               <Label  className='mb-4' htmlFor='photo'>Profile Picture</Label>
               <div className="mb-4">
-              {data?.photoURL ?    <img src={data.photoURL} alt="" className="w-28 h-28 rounded-full border-2 border-slate-800 object-cover" /> :
+              {data?.photoURL || fileEntry?.files?.[0]?.cdnUrl ?    <img src={fileEntry.files?.[0]?.cdnUrl ??  data.photoURL} alt="" className="w-28 h-28 rounded-full border-2 border-slate-800 object-cover" /> :
                 <User className='w-28 h-28 rounded-full border-2 border-slate-800 object-cover'/>}
             </div>
               <FileUploader fileEntry={fileEntry} onChange={setFileEntry} preview={false}/>
