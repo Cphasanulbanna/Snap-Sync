@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { FileUploaderRegular, OutputFileEntry, UploadCtxProvider } from '@uploadcare/react-uploader';
+import { FileUploaderRegular, OutputCollectionState, OutputCollectionStatus, OutputFileEntry, UploadCtxProvider } from '@uploadcare/react-uploader';
 import '@uploadcare/react-uploader/core.css';
-// import st from './FileUploader.module.scss';
 import { FileEntry } from '@/types';
 
 interface IFileUploaderProps {
@@ -15,7 +14,6 @@ const FileUploader: React.FunctionComponent<IFileUploaderProps> = ({fileEntry, o
 
   const uploadCarePublicKey = import.meta.env.VITE_UPLOAD_CARE_KEY
 
-  // console.log({uploadedFiles});
   
 
   const handleRemoveClick = React.useCallback((uuid: OutputFileEntry['uuid']) => {
@@ -36,36 +34,19 @@ const FileUploader: React.FunctionComponent<IFileUploaderProps> = ({fileEntry, o
     resetUploaderState();
   
     onChange({
-      ...fileEntry, // Keep existing properties
-      files: [...fileEntry.files, ...uploadedFiles] // Ensure 'files' is present
+      ...fileEntry, 
+      files: [...fileEntry.files, ...uploadedFiles] 
     });
   
     setUploadedFiles([]);
   };
 
 
-  const handleChangeEvent = (files) => {
-    setUploadedFiles([...files.allEntries.filter(f => f.status === 'success')] as OutputFileEntry<'success'>[]);
-  }
-  return   <div>
-  {/* <lr-config
-    ctx-name="my-uploader"
-    pubkey="74e63f3a7042561655f6"
-    multiple={true}
-    confirmUpload={false}
-    removeCopyright={true}
-    imgOnly={true}
-  ></lr-config> */}
-
-  {/* <lr-file-uploader-regular
-    ctx-name="my-uploader"
-    css-src={blocksStyles}
-  ></lr-file-uploader-regular> */}
-
-  {/* <lr-upload-ctx-provider ctx-name="my-uploader" ref={ctxProviderRef} /> */}
-
+  const handleChangeEvent = (event: OutputCollectionState<OutputCollectionStatus>) => {
+    setUploadedFiles(event.successEntries);
+  };
   
-
+  return   <div>
   <FileUploaderRegular
          sourceList="local, camera, facebook, gdrive"
          cameraModes="photo, video"
@@ -87,16 +68,20 @@ const FileUploader: React.FunctionComponent<IFileUploaderProps> = ({fileEntry, o
               key={file.uuid}
               src={`${file.cdnUrl}/-/preview/-/resize/x200/`}
               width="100"
-              alt={file.fileInfo?.originalFilename || ''}
-              title={file.fileInfo?.originalFilename || ''}
+              alt={file.fileInfo?.originalFilename ?? ''}
+              title={file.fileInfo?.originalFilename ?? ''}
             />
-
-            <button
-              className={"absolute top-0 right-0 z-20 bg-white px-2 py-0 rounded-full overflow-hidden"}
-              type="button"
-              onClick={() => handleRemoveClick(file.fileInfo.uuid)}
-            >×
-            </button>
+              <button
+                className="absolute top-0 right-0 z-20 bg-white px-2 py-0 rounded-full overflow-hidden"
+                type="button"
+                onClick={() => {
+                  if (file.fileInfo?.uuid) {
+                    handleRemoveClick(file.fileInfo.uuid);
+                  }
+                }}
+              >
+                ×
+              </button>
           </div>
         ))}
       </div>
