@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useUserAuth } from '@/context/userAuthContext';
-import { FileEntry, Post } from '@/types';
+import { FileEntry, PhotoMeta, Post } from '@/types';
 import * as React from 'react';
 
 interface ICreatePostProps {
@@ -28,6 +28,21 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = (props) => {
     e.preventDefault()
     console.log("file entry", fileEntry);
     console.log("created post", post);
+
+    const photoMeta:PhotoMeta[] = fileEntry.files.map((file) => {
+      return {cdnUrl: file.cdnUrl, uuid: file.uuid}
+    })
+
+    if(user != null) {
+      const newPost:Post = {
+        ...post,
+        userId: user?.uid || null,
+        photos: photoMeta
+      }
+      console.log({newPost});
+    }
+
+    
     
   }
   return <Layout>
