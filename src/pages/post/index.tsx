@@ -4,13 +4,16 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useUserAuth } from '@/context/userAuthContext';
+import { createPost } from '@/repository/post.service';
 import { FileEntry, PhotoMeta, Post } from '@/types';
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface ICreatePostProps {
 }
 
 const CreatePost: React.FunctionComponent<ICreatePostProps> = (props) => {
+  const navigate = useNavigate()
   const {user} = useUserAuth()
   const [fileEntry, setFileEntry] =React.useState<FileEntry>({
     files:[]
@@ -39,7 +42,8 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = (props) => {
         userId: user?.uid || null,
         photos: photoMeta
       }
-      console.log({newPost});
+      await createPost(newPost)
+      navigate("/")
     }
 
     
