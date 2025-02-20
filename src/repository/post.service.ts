@@ -13,7 +13,7 @@ export const getPosts = () => {
     return getDocs(q)
 }
 
-export const getPostByUserd = (id:string) => {
+export const getPostByUserId = (id:string) => {
     const q = query(collection(db, COLLECTION_NAME), where("userId", "==",id))
     return getDocs(q)
 }

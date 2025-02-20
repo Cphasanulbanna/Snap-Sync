@@ -45,6 +45,9 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = (props) => {
       await createPost(newPost)
       navigate("/")
     }
+    else {
+      navigate("/login")
+    }
 
     
     

@@ -1,10 +1,65 @@
-import React from 'react'
+import Layout from '@/components/layout'
+import { useUserAuth } from '@/context/userAuthContext'
+import { getPostByUserId } from '@/repository/post.service'
+import { DocumentResponse, Post } from '@/types'
+import React, { useEffect, useState } from 'react'
 
 type Props = {}
 
 const MyPhotos = (props: Props) => {
+  const {user} = useUserAuth()
+  const [data,setData] = useState<DocumentResponse[]>([])
+
+
+  const getAllPosts  = async (id: string) => {
+    try {
+        const querySnapshot = await getPostByUserId(id)
+        const tempArr:DocumentResponse[] =[]  
+        if(querySnapshot?.size > 0) {
+          querySnapshot?.forEach((doc) => {
+            const data =doc?.data() as Post
+            const responseObj:DocumentResponse  ={
+              id: doc.id,
+             ...data
+            }
+            tempArr.push(responseObj)
+          })
+          setData(tempArr)
+        }
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
+  useEffect(() => {
+    if(user != null) {
+      getAllPosts(user.uid)
+    }
+  },[])
+
+  const renderPosts = () => {
+    return data?.map((item) => {
+      return <div className='relative' key={item?.photos?.[0]?.uuid}>
+          <img src={`${item?.photos?.[0]?.cdnUrl}/-/progressive/yes/-/scale_crop/300x300/center/`} alt="" />
+      </div>
+    })
+  }
+
   return (
-    <div>MyPhotos</div>
+    <Layout>
+      <div className='flex justify-center'>
+        <div className="border max-w-3xl w-full">
+          <h3 className="bg-slate-800 text-white text-center text-lg p-2">My Photos</h3>
+          <div className="p-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {data ? renderPosts() :<div>Loading...</div>}
+          </div>
+        </div>
+        </div>
+   
+      </div>
+    </Layout>
   )
 }
 

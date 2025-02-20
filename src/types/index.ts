@@ -28,3 +28,13 @@ export interface Post {
     userId: string | null,
     date: Date
 }
+
+export interface DocumentResponse {
+    id: string,
+    caption: string,
+    photos: PhotoMeta[],
+    likes: number,
+    userLikes: [],
+    userId: string | null,
+    date: Date
+}
