@@ -24,8 +24,8 @@ const EditProfile: React.FunctionComponent<IEditProfileProps> = (props) => {
         files:[]
       })
 
-      const updateProfile = () => {
-
+      const updateProfile = async(e:React.MouseEvent<HTMLFormElement>) => {
+        e.preventDefault()
       }
   return <Layout>
   <div className="flex justify-center">
@@ -39,7 +39,7 @@ const EditProfile: React.FunctionComponent<IEditProfileProps> = (props) => {
               {data?.photoURL ?    <img src={data.photoURL} alt="" className="w-28 h-28 rounded-full border-2 border-slate-800 object-cover" /> :
                 <User className='w-28 h-28 rounded-full border-2 border-slate-800 object-cover'/>}
             </div>
-              <FileUploader fileEntry={fileEntry} onChange={setFileEntry}/>
+              <FileUploader fileEntry={fileEntry} onChange={setFileEntry} preview={false}/>
             </div>
             <div className="flex flex-col">
             <Label className='mb-4' htmlFor='displayName'>Display Name</Label>
@@ -59,7 +59,7 @@ const EditProfile: React.FunctionComponent<IEditProfileProps> = (props) => {
         
         <div className="flex items-center gap-x-4">
             <Button className='mt-4 w-32 mr-8' type='submit'>Update</Button>
-            <Button variant={"destructive"} className='mt-4 w-32 mr-8' onClick={() => navigate("/profile")}>Cancel</Button>
+            <Button type='button' variant={"destructive"} className='mt-4 w-32 mr-8' onClick={() => navigate("/profile")}>Cancel</Button>
         </div>
           </div>
         </form>

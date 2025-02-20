@@ -5,10 +5,11 @@ import { FileEntry } from '@/types';
 
 interface IFileUploaderProps {
   fileEntry: FileEntry,
-  onChange: (FileEntry: FileEntry) => void
+  onChange: (FileEntry: FileEntry) => void,
+  preview: boolean
 }
 
-const FileUploader: React.FunctionComponent<IFileUploaderProps> = ({fileEntry, onChange}) => {
+const FileUploader: React.FunctionComponent<IFileUploaderProps> = ({fileEntry, onChange,preview}) => {
   const [uploadedFiles, setUploadedFiles] = React.useState<OutputFileEntry<'success'>[]>([]);
   const ctxProviderRef = React.useRef<InstanceType<UploadCtxProvider>>(null);
 
@@ -54,12 +55,13 @@ const FileUploader: React.FunctionComponent<IFileUploaderProps> = ({fileEntry, o
          pubkey={uploadCarePublicKey}
          apiRef={ctxProviderRef}
          imgOnly
-         multiple
+         multiple={preview}
          removeCopyright
          confirmUpload={false}
          onChange={handleChangeEvent}
          onModalClose={handleModalCloseEvent}
       />
+      {preview &&
             <div className={"flex justify-start gap-2 mt-5"}>
         {fileEntry.files.map((file) => (
           <div key={file.uuid} className={"relative"}>
@@ -84,7 +86,7 @@ const FileUploader: React.FunctionComponent<IFileUploaderProps> = ({fileEntry, o
               </button>
           </div>
         ))}
-      </div>
+      </div>}
 </div>
 };
 

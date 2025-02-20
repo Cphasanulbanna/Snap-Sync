@@ -67,7 +67,7 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = (props) => {
                ></Textarea>
               <div className="flex flex-col gap-4">
                 <Label  className='mb-4' htmlFor='photo'>Photos</Label>
-                <FileUploader fileEntry={fileEntry} onChange={setFileEntry}/>
+                <FileUploader fileEntry={fileEntry} onChange={setFileEntry} preview={true}/>
               </div>
               <Button className='mt-8 w-32' type='submit'>Post</Button>
             </div>
