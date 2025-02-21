@@ -12,3 +12,25 @@ deployment
 --initialization completed
 
 9. npm run build
+
+-- deployment
+10. add hosting configuration in firebase.json file
+
+{
+  "hosting": {
+    "public": "dist", 
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
+
+11. firebase deploy --only hosting
+
+
+// project url
+https://snapsync-c3a6a.web.app
