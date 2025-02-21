@@ -23,7 +23,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "types": ["@uploadcare/blocks/types/jsx"]
+    "types": ["@uploadcare/file-uploader/types/jsx"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

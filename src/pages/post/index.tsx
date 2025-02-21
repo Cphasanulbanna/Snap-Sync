@@ -9,10 +9,9 @@ import { FileEntry, PhotoMeta, Post } from '@/types';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-interface ICreatePostProps {
-}
 
-const CreatePost: React.FunctionComponent<ICreatePostProps> = (props) => {
+
+const CreatePost: React.FunctionComponent = () => {
   const navigate = useNavigate()
   const {user} = useUserAuth()
   const [fileEntry, setFileEntry] =React.useState<FileEntry>({

@@ -12,7 +12,7 @@ interface IPostCardProps {
 
 const PostCard: React.FunctionComponent<IPostCardProps> = ({data}) => {
   const {user} = useUserAuth()
-  const [likesInfo, setLikesInfo] = React.useState<{likes: number, isLike:boolean}>({isLike: data?.userLikes?.includes(user?.uid) ? true : false, likes: data.likes})
+  const [likesInfo, setLikesInfo] = React.useState<{likes: number, isLike:boolean}>({isLike: data?.userLikes?.includes(user!.uid) ? true : false, likes: data.likes!})
 
   const updateLike = async (isVal: boolean) => {
     setLikesInfo({
@@ -20,13 +20,13 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({data}) => {
       isLike: !likesInfo.isLike
     })
     if(isVal) {
-      data.userLikes.push(user?.uid)
+      data.userLikes!.push(user!.uid)
     }
     else {
-      data.userLikes?.splice(data.userLikes.indexOf(user?.uid), 1)
+      data.userLikes?.splice(data.userLikes.indexOf(user!.uid), 1)
     }
 
-    await updateLikesOnPost(data?.id!, data?.userLikes,isVal ? likesInfo?.likes + 1 : likesInfo.likes -1)
+    await updateLikesOnPost(data.id!, data.userLikes!,isVal ? likesInfo?.likes + 1 : likesInfo.likes -1)
   }
   return <Card className='mb-6'>
     <CardHeader className='flex flex-col p-3'>

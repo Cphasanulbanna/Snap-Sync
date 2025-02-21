@@ -1,9 +1,8 @@
 import * as React from 'react';
 
-interface IErrorProps {
-}
 
-const ErrorPage: React.FunctionComponent<IErrorProps> = (props) => {
+
+const ErrorPage: React.FunctionComponent = () => {
   return <div>Error</div>
 };
 

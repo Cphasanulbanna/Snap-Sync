@@ -6,10 +6,7 @@ import { User2 } from 'lucide-react';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-interface IUserListProps {
-}
-
-const UserList: React.FunctionComponent<IUserListProps> = (props) => {
+const UserList: React.FunctionComponent = () => {
     const {user} = useUserAuth()
     const [suggestedUsers, setSuggestedUsers] = React.useState<ProfileResponse[]>([])
 
@@ -27,7 +24,7 @@ const UserList: React.FunctionComponent<IUserListProps> = (props) => {
 
     const renderUsers = () => {
         return suggestedUsers.map((user, index) => (
-            <Link key={index} to={`/profile/${user.uid}`}>
+            <Link key={index} to={`/profile/${user.userId}`}>
                 <div className="flex flex-row items-center border-b mb-4 border-gray-400 justify-start">
                     <span className="mr-2">
                         {user.photoURL? <img src={user.photoURL} className='w-10 h-10 rounded-full border-2 border-slate-800' alt="user"/> : <User2 />}

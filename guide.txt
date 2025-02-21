@@ -1,0 +1,14 @@
+deployment
+
+1. npm i -g firebase-tools
+2. firebase login, login in the browser after entering the command
+3. firebase init
+4. select used service using space key
+5. select use an existing project
+6. for public directory, change it  to "dist" since we r using vite
+7. fore connector select default
+8. configure single page => select yes
+
+--initialization completed
+
+9. npm run build

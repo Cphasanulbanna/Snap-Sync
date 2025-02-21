@@ -12,10 +12,9 @@ import { User } from 'lucide-react';
 import * as React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-interface IEditProfileProps {
-}
 
-const EditProfile: React.FunctionComponent<IEditProfileProps> = (props) => {
+
+const EditProfile: React.FunctionComponent = () => {
     const location = useLocation()
     const navigate = useNavigate()
     const {user, updateProfileInfo} = useUserAuth()

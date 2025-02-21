@@ -37,7 +37,7 @@ export interface DocumentResponse {
     caption?: string,
     photos?: PhotoMeta[],
     likes?: number,
-    userLikes?: [],
+    userLikes?: string[],
     userId?: string | null,
     date?: Date,
     username?: string,

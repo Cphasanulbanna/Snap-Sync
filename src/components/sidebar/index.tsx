@@ -11,8 +11,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '../ui/button';
 import { useUserAuth } from '@/context/userAuthContext';
-interface ISidebarProps {
-}
+
 
 const navLinks = [
     {
@@ -52,7 +51,7 @@ const navLinks = [
     }
 ]
 
-const Sidebar: React.FunctionComponent<ISidebarProps> = (props) => {
+const Sidebar: React.FunctionComponent = () => {
     const {pathname} = useLocation()
     const {logOut} = useUserAuth()
 

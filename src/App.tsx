@@ -3,9 +3,9 @@ import { RouterProvider } from 'react-router-dom'
 import router from './routes'
 import { UserAuthProvider } from './context/userAuthContext'
 
-type Props = {}
 
-const App:React.FunctionComponent = (props: Props) => {
+
+const App:React.FunctionComponent = () => {
   return <UserAuthProvider>
      <RouterProvider router={router} />
   </UserAuthProvider>

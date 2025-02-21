@@ -6,16 +6,16 @@ import { useUserAuth } from '@/context/userAuthContext'
 import {  getPosts } from '@/repository/post.service'
 import { DocumentResponse } from '@/types'
 import { Search } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 
-type Props = {}
 
-const Home = (props: Props) => {
+
+const Home = () => {
   const {user} = useUserAuth()
   const [data,setData]  =useState<DocumentResponse[]>([])
 
   const getAllPosts = async()=> {
-    const response:DocumentResponse[] = (await  getPosts()) || []
+    const response:DocumentResponse[] = (await  getPosts()) as DocumentResponse[] || []
     setData(response)
   }
 

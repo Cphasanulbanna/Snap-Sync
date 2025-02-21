@@ -8,9 +8,9 @@ import { Edit2Icon, HeartIcon, User } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-type Props = {}
 
-const Profile:React.FunctionComponent  = (props: Props) => {
+
+const Profile:React.FunctionComponent  = () => {
   const {user} = useUserAuth()
   const navigate = useNavigate()
     const [data,setData] = useState<DocumentResponse[]>([])
@@ -67,7 +67,7 @@ const Profile:React.FunctionComponent  = (props: Props) => {
     const renderPosts = () => {
       return data.map((item) => {
         return (
-          <div key={item.photos[0].uuid} className="relative">
+          <div key={item.photos![0].uuid} className="relative">
             <div className="absolute group transition-all duration-200 bg-transparent hover:bg-slate-950 hover:bg-opacity-75 top-0 bottom-0 left-0 right-0 w-full h-full">
               <div className="flex flex-col justify-center items-center w-full h-full">
                 <HeartIcon className="hidden group-hover:block fill-white" />
@@ -77,7 +77,7 @@ const Profile:React.FunctionComponent  = (props: Props) => {
               </div>
             </div>
             <img
-              src={`${item.photos[0].cdnUrl}/-/progressive/yes/-/scale_crop/300x300/center/`}
+              src={`${item.photos![0].cdnUrl}/-/progressive/yes/-/scale_crop/300x300/center/`}
             />
           </div>
         );

@@ -3,11 +3,11 @@ import { useUserAuth } from '@/context/userAuthContext'
 import { getPostByUserId } from '@/repository/post.service'
 import { DocumentResponse, Post } from '@/types'
 import { HeartIcon } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 
-type Props = {}
 
-const MyPhotos = (props: Props) => {
+
+const MyPhotos = () => {
   const {user} = useUserAuth()
   const [data,setData] = useState<DocumentResponse[]>([])
 
@@ -42,7 +42,7 @@ const MyPhotos = (props: Props) => {
   const renderPosts = () => {
     return data.map((item) => {
       return (
-        <div key={item.photos[0].uuid} className="relative">
+        <div key={item.photos![0].uuid} className="relative">
           <div className="absolute group transition-all duration-200 bg-transparent hover:bg-slate-950 hover:bg-opacity-75 top-0 bottom-0 left-0 right-0 w-full h-full">
             <div className="flex flex-col justify-center items-center w-full h-full">
               <HeartIcon className="hidden group-hover:block fill-white" />
@@ -52,7 +52,7 @@ const MyPhotos = (props: Props) => {
             </div>
           </div>
           <img
-            src={`${item.photos[0].cdnUrl}/-/progressive/yes/-/scale_crop/300x300/center/`}
+            src={`${item.photos![0].cdnUrl}/-/progressive/yes/-/scale_crop/300x300/center/`}
           />
         </div>
       );

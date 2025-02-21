@@ -17,9 +17,9 @@ const initialValue: UserLogIn = {
   password: ""
 };
 
-type Props = {}
 
-const Login = (props: Props) => {
+
+const Login = () => {
 
   const {googleSignIn, logIn} = useUserAuth()
   const navigate = useNavigate()
