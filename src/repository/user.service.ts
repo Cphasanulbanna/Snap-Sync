@@ -51,3 +51,28 @@ export const updateUserProfile = async (id: string, user: UserProfile) => {
      
     }   
 }
+
+export const getAllUsers = async(userId:string) => {
+    try {
+            const querySnapShots = await getDocs(collection(db,COLLECTION_NAME))
+            const tempArray:ProfileResponse[] = []
+            if(querySnapShots.size > 0) {
+                  querySnapShots.forEach((obj) => {
+                          const data = obj.data() as UserProfile
+                          const responseObj:ProfileResponse  ={
+                              id: obj.id,
+                              ...data
+                          }
+                          tempArray.push(responseObj)
+                      })
+                      return tempArray?.filter((item) => item.userId !== userId)
+            }
+            else {
+                console.log("no data");
+                
+            }
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
