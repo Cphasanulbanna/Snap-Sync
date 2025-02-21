@@ -29,7 +29,7 @@ export const getUserProfile = async (userId: string) => {
                 return tempData
             }
             else {
-                return tempData
+                return null
                 
             }
     } catch (error) {

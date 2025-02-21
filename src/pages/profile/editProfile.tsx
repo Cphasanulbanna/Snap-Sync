@@ -4,8 +4,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { useUserAuth } from '@/context/userAuthContext';
+import { updateProfileInfoOnPost } from '@/repository/post.service';
 import { createUserProfile, updateUserProfile } from '@/repository/user.service';
-import { FileEntry, UserProfile } from '@/types';
+import { FileEntry, ProfileInfo, UserProfile } from '@/types';
 import { User } from 'lucide-react';
 import * as React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -16,6 +18,7 @@ interface IEditProfileProps {
 const EditProfile: React.FunctionComponent<IEditProfileProps> = (props) => {
     const location = useLocation()
     const navigate = useNavigate()
+    const {user, updateProfileInfo} = useUserAuth()
     const {id, userId, displayName, userBio, photoURL} = location.state
     const [data, setData]=React.useState<UserProfile>({
          userId, displayName, userBio, photoURL
@@ -34,6 +37,13 @@ const EditProfile: React.FunctionComponent<IEditProfileProps> = (props) => {
             else {
                  await createUserProfile(data)
             }
+            const profileInfo:ProfileInfo = {
+                user: user!,
+                displayName: data.displayName,
+                photoURL: data.photoURL
+            }
+            updateProfileInfo(profileInfo)
+            updateProfileInfoOnPost(profileInfo)
             navigate('/profile')
         } catch (error) {
             console.log(error);

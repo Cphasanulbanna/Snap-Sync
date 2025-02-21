@@ -33,14 +33,16 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = (props) => {
     console.log("created post", post);
 
     const photoMeta:PhotoMeta[] = fileEntry.files.map((file) => {
-      return {cdnUrl: file.cdnUrl, uuid: file.uuid}
+      return {cdnUrl: file.cdnUrl!, uuid: file.uuid!}
     })
 
     if(user != null) {
       const newPost:Post = {
         ...post,
         userId: user?.uid || null,
-        photos: photoMeta
+        photos: photoMeta,
+        username: user.displayName!,
+        photoURL: user.photoURL!
       }
       await createPost(newPost)
       navigate("/")

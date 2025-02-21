@@ -27,7 +27,9 @@ export interface Post {
     likes: number,
     userLikes: [],
     userId: string | null,
-    date: Date
+    date: Date,
+    username?: string,
+    photoURL?: string
 }
 
 export interface DocumentResponse {
@@ -37,7 +39,9 @@ export interface DocumentResponse {
     likes?: number,
     userLikes?: [],
     userId?: string | null,
-    date?: Date
+    date?: Date,
+    username?: string,
+    photoURL?: string
 }
 
 export interface ProfileInfo {

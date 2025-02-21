@@ -1,5 +1,5 @@
 import { db } from "@/firebaseConfig";
-import { DocumentResponse, Post } from "@/types";
+import { DocumentResponse, Post, ProfileInfo } from "@/types";
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, orderBy, query, updateDoc, where } from "firebase/firestore";
 
 const COLLECTION_NAME = "posts"
@@ -51,3 +51,22 @@ export const updateLikesOnPost = (id:string, userLikes: string[],likes:number) =
         userLikes: userLikes
     })
 }   
+
+export const updateProfileInfoOnPost  = async(ProfileInfo:ProfileInfo) => {
+    const q = query(collection(db, COLLECTION_NAME), where("userId", "==",ProfileInfo.user?.uid))
+   const querySnapShot = await getDocs(q)
+   if(querySnapShot.size > 0) {
+    querySnapShot?.forEach((obj) => {
+        const docRef = doc(db, COLLECTION_NAME, obj.id)
+        updateDoc(docRef, {
+            userName: ProfileInfo.displayName,
+            photoURL: ProfileInfo.photoURL
+        })
+ 
+    })
+   }
+   else {
+    console.log("no data");
+    
+   }
+}

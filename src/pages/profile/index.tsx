@@ -51,7 +51,7 @@ const Profile:React.FunctionComponent  = (props: Props) => {
 
     const getUserProfileInfo = async(id:string) => {
       const data:ProfileResponse = await getUserProfile(id) ?? {}
-      if(data) {
+      if(data.displayName) {
         setUserInfo(data)
       }
 
@@ -104,7 +104,7 @@ const Profile:React.FunctionComponent  = (props: Props) => {
                 <User className='w-28 h-28 rounded-full border-2 border-slate-800 object-cover'/>}
               </div>
               <div>
-              <div className="text-xl ml-3">{userInfo?.displayName}</div>
+              <div className="text-xl ml-3">{userInfo?.displayName ? userInfo?.displayName : "Guest User"}</div>
               <div className="text-xl ml-3">{user?.email ? user?.email : ""}</div>
               </div>
             </div>
